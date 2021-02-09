@@ -4,7 +4,7 @@ const initialState={
     abc: 10,
     registeredUsers:[],
     isLogged: false,
-    userDetails:{}
+    userDetails:[]
 }
 
 const reducer = (state=initialState, action)=>{
@@ -12,16 +12,18 @@ const reducer = (state=initialState, action)=>{
         case actions.USER_LOGIN:{
             return{
                 ...state,
-                registeredUsers: state.registeredUsers = 0 ? action.data : [...state.registeredUsers, action.data],
-                // registeredUsers: state.registeredUsers = 0 ? action.data : (action.data),
+                registeredUsers: [...state.registeredUsers, action.data],
                 abcusers:[...state.registeredUsers,action.data]
             }
         }
 
         case actions.USER_SIGNUP:{
+            console.log(action.data,"action.daa")
             return{
                 ...state,
-                registeredUsers: state.registeredUsers < 0 ? action.data : [...state.registeredUsers, action.data]
+                registeredUsers: [...state.registeredUsers, action.data],
+                // registeredUsers: state.registeredUsers = 0 ? action.data : (action.data),
+                abcusers:[...state.registeredUsers,action.data]
             }
         }
 

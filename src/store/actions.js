@@ -8,9 +8,11 @@ export  const USER_LOGIN =(payload)=>{
     }
 }
 
-export  function USER_SIGNUP(){
+export  const  USER_SIGNUP=(payload)=>{
+    console.log(payload,'acions data')
     return{
         type:actions.USER_SIGNUP,
+        data:payload
     }
 }
 

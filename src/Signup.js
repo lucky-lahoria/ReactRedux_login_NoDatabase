@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./Signup.css";
-import  * as actions from "./store/actions";
+import * as actions from "./store/actions";
 
 class Signup extends Component {
   constructor(props) {
@@ -19,12 +19,15 @@ class Signup extends Component {
       type: "",
       msg: "",
     };
+    this.abc={
+        kumar:""
+    }
   }
 
-  componentDidMount(){
-      this.props.statefetch()
+  componentDidMount() {
+    this.props.statefetch();
   }
-  validation = () => {
+  validation = (data) => {
     if (this.state.fullname.length <= 3) {
       this.setState({ type: "fullname" });
       this.setState({ msg: "please fill propper name" });
@@ -70,17 +73,16 @@ class Signup extends Component {
       this.setState({ validation: true }, () => {
         console.log(this.state.validation);
       });
-      return true;
+      return data;
     }
   };
 
   signup = (e) => {
     // this.props.registerUser(this.state);
-    if (!this.validation()) {
-      
-    }
-    else{
-        
+    if (this.validation(this.state)) {
+        this.props.regsiteruser(this.state)
+        console.log(this.state,"afeter alknkanfklandkj")
+    } else {
     }
     console.log();
   };
@@ -88,6 +90,7 @@ class Signup extends Component {
   valuefields = (e) => {
     this.setState({ msg: "" });
     if (e.target.name == "terms") {
+        
       this.setState({ [e.target.name]: !this.state.terms });
     } else {
       this.setState({ [e.target.name]: e.target.value });
@@ -103,9 +106,7 @@ class Signup extends Component {
         >
           <h2 className="text-center p-0">SignUp </h2>
           <div className="col-sm-8 col-md-6" style={{ marginTop: "-0" }}>
-            <label htmlFor="username" className="label">
-              UserName:
-            </label>
+            <label className="label">UserName:</label>
             <input
               onChange={(e) => {
                 this.valuefields(e);
@@ -118,9 +119,7 @@ class Signup extends Component {
             <p style={{ color: "red" }}>
               {this.state.type == "username" && this.state.msg}
             </p>
-            <label htmlFor="FullName" className="label">
-              FullName:
-            </label>
+            <label className="label">FullName:</label>
             <input
               onChange={(e) => {
                 this.valuefields(e);
@@ -133,9 +132,7 @@ class Signup extends Component {
             <p style={{ color: "red" }}>
               {this.state.type == "fullname" && this.state.msg}
             </p>
-            <label htmlFor="Phone" className="label">
-              Phone:
-            </label>
+            <label className="label">Phone:</label>
             <input
               onChange={(e) => {
                 this.valuefields(e);
@@ -148,9 +145,7 @@ class Signup extends Component {
             <p style={{ color: "red" }}>
               {this.state.type == "phone" && this.state.msg}
             </p>
-            <label htmlFor="email" className="label">
-              Email:
-            </label>
+            <label className="label">Email:</label>
 
             <input
               onChange={(e) => {
@@ -164,9 +159,7 @@ class Signup extends Component {
             <p style={{ color: "red" }}>
               {this.state.type == "email" && this.state.msg}
             </p>
-            <label htmlFor="Password" className="label">
-              Password:
-            </label>
+            <label className="label">Password:</label>
 
             <input
               onChange={(e) => {
@@ -180,9 +173,7 @@ class Signup extends Component {
             <p style={{ color: "red" }}>
               {this.state.type == "password" && this.state.msg}
             </p>
-            <label htmlFor="Verify Password" className="label">
-              Verify Password:
-            </label>
+            <label className="label">Verify Password:</label>
 
             <input
               onChange={(e) => {
@@ -196,9 +187,7 @@ class Signup extends Component {
             <p style={{ color: "red" }}>
               {this.state.type == "password" && this.state.msg}
             </p>
-            <label htmlFor="Sponsor Id" className="label">
-              Sponsor Id:
-            </label>
+            <label className="label">Sponsor Id:</label>
             <input
               onChange={(e) => {
                 this.valuefields(e);
@@ -212,9 +201,7 @@ class Signup extends Component {
               {this.state.type == "" && this.state.msg}
             </p>
 
-            <label htmlFor="Address" className="label">
-              Address:
-            </label>
+            <label className="label">Address:</label>
             <input
               onChange={(e) => {
                 this.valuefields(e);
@@ -259,20 +246,20 @@ class Signup extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {};
+};
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    statefetch: () => {
+      dispatch(actions.GET_USERS());
+    },
+    regsiteruser: data => {
+      dispatch(actions.USER_SIGNUP(data));
+    },
+  };
+};
 
-const mapStateToProps=(state)=>{
-    console.log(state)
-    return{
-
-    }
-}
-
-const mapDispatchToProps=(dispatch)=>{
-    return{
-        statefetch:()=>{dispatch(actions.GET_USERS())}
-    }
-}
-
-
-export default connect( mapStateToProps,mapDispatchToProps)(Signup)
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
