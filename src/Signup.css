@@ -6,3 +6,34 @@
     outline:none !important
 
 }
+
+
+
+.popup_box{
+    /* position: absolute; */
+    align-self:center;
+    border: 1px solid black;
+    height: 500px;
+    max-height: 620px;
+    /* right:50%; */
+    width: 400px;
+}
+
+
+.verifier{
+    background: white;
+    border-radius: 4px;
+}
+
+
+
+.main_box{
+    position: relative;
+}
+
+
+
+
+@media(max-width:562px){
+    
+}

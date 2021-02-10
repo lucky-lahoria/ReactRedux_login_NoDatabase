@@ -32,6 +32,7 @@ class Login extends Component {
         className="d-flex  align-items-center justify-content-center flex-column shaddow_bg"
         style={{ position: "relative", width: "100%", height: "100vh" }}
       >
+        <Link to="/signup">Signup</Link>
         <div className="shaddow_bg" style={{width: "20%"}}>
           <lable for="username" className="pb-0" style={{ width: "25%" }}>
             Username:
